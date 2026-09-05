@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08090d">
+
 <title>Vidyajeet AI Studio</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -34,22 +37,30 @@ body{
     overflow:hidden;
 }
 
-/* =========================
-   OPENING SCREEN
-========================= */
+/* ==================================================
+   SPLASH
+================================================== */
 
 #splashScreen{
     position:fixed;
     inset:0;
     z-index:99999;
     background:
-        radial-gradient(circle at center,rgba(111,91,252,.13),transparent 35%),
+        radial-gradient(
+            circle at center,
+            rgba(111,91,252,.13),
+            transparent 35%
+        ),
         #08090d;
+
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    transition:opacity .8s ease,visibility .8s ease;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
 }
 
 #splashScreen.hide{
@@ -70,12 +81,17 @@ body{
     height:145px;
     border-radius:32px;
     object-fit:cover;
+
     box-shadow:
         0 0 50px rgba(126,105,255,.22),
         0 20px 50px rgba(0,0,0,.45);
+
     opacity:0;
     transform:scale(.75);
-    animation:iconIn 1s cubic-bezier(.2,.8,.2,1) forwards;
+
+    animation:
+        iconIn 1s cubic-bezier(.2,.8,.2,1)
+        forwards;
 }
 
 .splashTitle{
@@ -83,9 +99,13 @@ body{
     font-size:clamp(30px,6vw,46px);
     font-weight:750;
     letter-spacing:-1.5px;
+
     opacity:0;
     transform:translateY(15px);
-    animation:textIn .8s ease forwards;
+
+    animation:
+        textIn .8s ease forwards;
+
     animation-delay:.7s;
 }
 
@@ -94,23 +114,36 @@ body{
     color:#a9afbd;
     font-size:clamp(14px,3vw,18px);
     letter-spacing:.5px;
+
     opacity:0;
     transform:translateY(12px);
-    animation:textIn .8s ease forwards;
+
+    animation:
+        textIn .8s ease forwards;
+
     animation-delay:1s;
 }
 
 .creatorPlate{
     margin-top:40px;
     padding:14px 24px;
+
     border:1px solid rgba(255,255,255,.11);
     border-radius:15px;
+
     background:rgba(255,255,255,.045);
+
     backdrop-filter:blur(16px);
-    box-shadow:0 12px 35px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.25);
+
     opacity:0;
     transform:translateY(15px);
-    animation:textIn .8s ease forwards;
+
+    animation:
+        textIn .8s ease forwards;
+
     animation-delay:1.35s;
 }
 
@@ -130,58 +163,74 @@ body{
 }
 
 @keyframes iconIn{
+
     to{
         opacity:1;
         transform:scale(1);
     }
+
 }
 
 @keyframes textIn{
+
     to{
         opacity:1;
         transform:translateY(0);
     }
+
 }
 
-/* =========================
+
+/* ==================================================
    APP
-========================= */
+================================================== */
 
 #app{
     height:100vh;
     display:flex;
     opacity:0;
-    transition:opacity .7s ease;
+
+    transition:
+        opacity .7s ease;
 }
 
 #app.show{
     opacity:1;
 }
 
-/* =========================
+
+/* ==================================================
    SIDEBAR
-========================= */
+================================================== */
 
 .sidebar{
     width:280px;
     background:#0d0f14;
     border-right:1px solid var(--border);
+
     display:flex;
     flex-direction:column;
+
     padding:14px;
+
     flex-shrink:0;
 }
 
 .newChat{
     width:100%;
     padding:12px;
+
     border:1px solid var(--border);
     border-radius:10px;
+
     background:#171a21;
     color:white;
+
     cursor:pointer;
+
     font-size:14px;
     text-align:left;
+
     transition:.2s;
 }
 
@@ -195,10 +244,14 @@ body{
 
 .searchBox input{
     width:100%;
+
     padding:10px 12px;
+
     border:1px solid var(--border);
     border-radius:9px;
+
     outline:none;
+
     background:#14171e;
     color:white;
 }
@@ -212,12 +265,19 @@ body{
 .chatItem{
     display:flex;
     align-items:center;
+
     gap:7px;
+
     padding:9px;
+
     border-radius:9px;
+
     margin-bottom:3px;
+
     cursor:pointer;
+
     color:#d8dbe2;
+
     font-size:13px;
 }
 
@@ -228,6 +288,7 @@ body{
 
 .chatTitle{
     flex:1;
+
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
@@ -241,8 +302,11 @@ body{
 .chatButtons button{
     border:0;
     background:transparent;
+
     color:#8f96a4;
+
     cursor:pointer;
+
     padding:3px;
 }
 
@@ -252,7 +316,9 @@ body{
 
 .sidebarBottom{
     border-top:1px solid var(--border);
+
     padding-top:12px;
+
     margin-top:8px;
 }
 
@@ -263,37 +329,52 @@ body{
 
 .creatorMain .small{
     font-size:10px;
+
     color:#737a87;
+
     text-transform:uppercase;
+
     letter-spacing:1px;
 }
 
 .creatorMain .name{
     margin-top:4px;
+
     font-size:12px;
+
     font-weight:600;
+
     color:#cdd1da;
 }
 
-/* =========================
+
+/* ==================================================
    MAIN
-========================= */
+================================================== */
 
 .main{
     flex:1;
     min-width:0;
+
     display:flex;
     flex-direction:column;
 }
 
 .topbar{
     height:60px;
+
     border-bottom:1px solid var(--border);
+
     display:flex;
     align-items:center;
+
     gap:10px;
+
     padding:0 16px;
+
     background:rgba(8,9,13,.9);
+
+    flex-shrink:0;
 }
 
 .menuButton{
@@ -307,18 +388,26 @@ body{
 
 .controls{
     margin-left:auto;
+
     display:flex;
+
     gap:7px;
 }
 
 select,
 .topButton{
     border:1px solid var(--border);
+
     background:#14171e;
+
     color:#dfe2e8;
+
     border-radius:8px;
+
     padding:8px 10px;
+
     font-size:12px;
+
     outline:none;
 }
 
@@ -326,31 +415,109 @@ select,
     cursor:pointer;
 }
 
+
+/* ==================================================
+   TOOL NAVIGATION
+================================================== */
+
+.toolBar{
+    display:flex;
+
+    gap:7px;
+
+    padding:10px 15px;
+
+    border-bottom:1px solid var(--border);
+
+    background:#0b0d12;
+
+    overflow-x:auto;
+
+    flex-shrink:0;
+}
+
+.toolButton{
+    white-space:nowrap;
+
+    border:1px solid var(--border);
+
+    background:#12151b;
+
+    color:#aeb4bf;
+
+    padding:8px 12px;
+
+    border-radius:9px;
+
+    cursor:pointer;
+
+    font-size:12px;
+}
+
+.toolButton:hover,
+.toolButton.active{
+    background:#1d2029;
+    color:white;
+}
+
+.toolButton.active{
+    border-color:#5149a7;
+}
+
+
+/* ==================================================
+   CHAT
+================================================== */
+
+#chatPage{
+    flex:1;
+
+    min-height:0;
+
+    display:flex;
+    flex-direction:column;
+}
+
 .messages{
     flex:1;
+
     overflow-y:auto;
-    padding:25px 15px 140px;
+
+    padding:
+        25px
+        15px
+        140px;
 }
 
 .message{
     max-width:850px;
-    margin:0 auto 22px;
+
+    margin:
+        0 auto
+        22px;
 }
 
 .messageRow{
     display:flex;
+
     gap:12px;
 }
 
 .avatar{
     width:32px;
     height:32px;
+
     border-radius:9px;
+
     flex-shrink:0;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     font-size:14px;
+
     font-weight:bold;
 }
 
@@ -369,30 +536,43 @@ select,
 
 .role{
     font-size:12px;
+
     color:#858c99;
+
     margin-bottom:5px;
 }
 
 .text{
     line-height:1.65;
+
     font-size:14px;
+
     color:#e9ebef;
+
     overflow-wrap:anywhere;
 }
 
 .userBubble{
     background:var(--user);
+
     border-radius:13px;
+
     padding:11px 14px;
+
     display:inline-block;
 }
 
 .text pre{
     background:#0a0c10;
+
     border:1px solid var(--border);
+
     border-radius:10px;
+
     padding:13px;
+
     overflow:auto;
+
     margin:10px 0;
 }
 
@@ -402,74 +582,103 @@ select,
 
 .inlineCode{
     background:#191c24;
+
     border-radius:5px;
+
     padding:2px 5px;
 }
 
 .answerActions{
     display:flex;
+
     gap:6px;
+
     margin-top:8px;
 }
 
 .answerActions button{
     border:1px solid var(--border);
+
     background:#12151b;
+
     color:#9299a6;
+
     padding:5px 8px;
+
     border-radius:7px;
+
     cursor:pointer;
+
     font-size:11px;
 }
 
 .answerActions button:hover{
     color:white;
+
     background:#1a1d25;
 }
 
-/* =========================
+
+/* ==================================================
    WELCOME
-========================= */
+================================================== */
 
 .welcome{
     max-width:850px;
+
     margin:80px auto;
+
     text-align:center;
 }
 
 .welcomeIcon{
     width:75px;
     height:75px;
+
     border-radius:18px;
+
     object-fit:cover;
+
     margin-bottom:18px;
 }
 
 .welcome h2{
     font-size:27px;
+
     margin-bottom:8px;
 }
 
 .welcome p{
     color:var(--muted);
+
     font-size:14px;
 }
 
 .quickPrompts{
     display:flex;
+
     flex-wrap:wrap;
+
     justify-content:center;
+
     gap:8px;
+
     margin-top:25px;
 }
 
 .quickPrompt{
     border:1px solid var(--border);
+
     background:#12151b;
+
     color:#cdd1d9;
+
     border-radius:10px;
+
     padding:9px 12px;
+
     cursor:pointer;
+
     font-size:12px;
 }
 
@@ -477,57 +686,97 @@ select,
     background:#1b1e26;
 }
 
-/* =========================
-   INPUT
-========================= */
+
+/* ==================================================
+   CHAT INPUT
+================================================== */
 
 .inputArea{
     position:fixed;
+
     bottom:0;
+
     right:0;
+
     left:280px;
-    padding:15px 18px 18px;
-    background:linear-gradient(transparent,#08090d 28%);
+
+    padding:
+        15px
+        18px
+        18px;
+
+    background:
+        linear-gradient(
+            transparent,
+            #08090d 28%
+        );
+
+    z-index:100;
 }
 
 .inputWrap{
     max-width:850px;
+
     margin:auto;
+
     border:1px solid var(--border);
+
     background:#12151b;
+
     border-radius:15px;
+
     display:flex;
+
     align-items:flex-end;
+
     padding:8px;
-    box-shadow:0 10px 40px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.25);
 }
 
 #messageInput{
     flex:1;
+
     resize:none;
+
     border:0;
+
     outline:none;
+
     background:transparent;
+
     color:white;
+
     padding:10px;
+
     min-height:42px;
+
     max-height:150px;
+
     font-family:inherit;
+
     font-size:14px;
 }
 
 .inputButtons{
     display:flex;
+
     gap:5px;
 }
 
 .inputButton{
     width:38px;
     height:38px;
+
     border:0;
+
     border-radius:9px;
+
     background:#1b1f28;
+
     color:#aab0bb;
+
     cursor:pointer;
 }
 
@@ -537,6 +786,7 @@ select,
 
 .sendButton{
     background:var(--accent);
+
     color:white;
 }
 
@@ -546,38 +796,752 @@ select,
 
 .typing{
     display:inline-flex;
+
     gap:4px;
+
     padding:8px 0;
 }
 
 .typing span{
     width:6px;
     height:6px;
+
     background:#9298a4;
+
     border-radius:50%;
-    animation:typing 1s infinite;
+
+    animation:
+        typing 1s infinite;
 }
 
-.typing span:nth-child(2){animation-delay:.15s}
-.typing span:nth-child(3){animation-delay:.3s}
+.typing span:nth-child(2){
+    animation-delay:.15s;
+}
+
+.typing span:nth-child(3){
+    animation-delay:.3s;
+}
 
 @keyframes typing{
-    0%,100%{opacity:.3;transform:translateY(0)}
-    50%{opacity:1;transform:translateY(-3px)}
+
+    0%,100%{
+        opacity:.3;
+        transform:translateY(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:translateY(-3px);
+    }
+
 }
 
-/* =========================
+
+/* ==================================================
+   IMAGE CREATION
+================================================== */
+
+#imagePage{
+    display:none;
+
+    flex:1;
+
+    min-height:0;
+
+    overflow-y:auto;
+
+    padding:25px;
+}
+
+#imagePage.active{
+    display:block;
+}
+
+.imageHeader{
+    max-width:1150px;
+
+    margin:
+        0 auto
+        20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.imageTitle{
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+}
+
+.imageTitleIcon{
+    width:50px;
+    height:50px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6d5dfc,
+            #9a8fff
+        );
+
+    font-size:25px;
+}
+
+.imageTitle h1{
+    font-size:25px;
+}
+
+.imageTitle p{
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-top:4px;
+}
+
+.imageHistoryButton{
+    border:1px solid var(--border);
+
+    background:#14171e;
+
+    color:#dfe2e8;
+
+    padding:10px 13px;
+
+    border-radius:9px;
+
+    cursor:pointer;
+}
+
+
+/* WORKSPACE */
+
+.imageWorkspace{
+    max-width:1150px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        390px
+        minmax(0,1fr);
+
+    gap:18px;
+}
+
+.imagePanel{
+    border:1px solid var(--border);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.015)
+        );
+
+    border-radius:17px;
+
+    padding:18px;
+}
+
+.imagePanel h3{
+    font-size:14px;
+
+    margin-bottom:12px;
+}
+
+.imagePrompt{
+    width:100%;
+
+    min-height:145px;
+
+    resize:vertical;
+
+    background:#0b0d12;
+
+    color:white;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:13px;
+
+    outline:none;
+
+    font:inherit;
+
+    line-height:1.5;
+}
+
+.imagePrompt:focus{
+    border-color:#5950c0;
+}
+
+.imagePromptTools{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:8px;
+
+    font-size:11px;
+
+    color:#777f8c;
+}
+
+
+/* UPLOAD */
+
+.referenceBox{
+    margin-top:18px;
+}
+
+.referenceButton{
+    width:100%;
+
+    border:1px dashed #3a3f4b;
+
+    background:#0c0f14;
+
+    color:#aeb5c0;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    text-align:center;
+}
+
+.referenceButton:hover{
+    border-color:#6558e8;
+
+    color:white;
+}
+
+.referencePreview{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:7px;
+
+    margin-top:10px;
+}
+
+.referenceItem{
+    position:relative;
+}
+
+.referenceThumb{
+    width:100%;
+
+    aspect-ratio:1;
+
+    object-fit:cover;
+
+    border-radius:8px;
+
+    border:1px solid var(--border);
+}
+
+.removeReference{
+    position:absolute;
+
+    right:3px;
+    top:3px;
+
+    width:20px;
+    height:20px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.75);
+
+    color:white;
+
+    cursor:pointer;
+}
+
+
+/* OPTIONS */
+
+.imageOptions{
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.imageOption label{
+    display:block;
+
+    font-size:11px;
+
+    color:#9299a6;
+
+    margin-bottom:6px;
+}
+
+.imageOption select{
+    width:100%;
+
+    padding:10px;
+
+    background:#0b0d12;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    color:white;
+
+    outline:none;
+}
+
+.fullOption{
+    grid-column:
+        1 / -1;
+}
+
+
+/* GENERATE */
+
+.generateImageButton{
+    width:100%;
+
+    margin-top:17px;
+
+    border:0;
+
+    border-radius:11px;
+
+    padding:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6d5dfc,
+            #887bff
+        );
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(109,93,252,.18);
+}
+
+.generateImageButton:hover{
+    filter:brightness(1.08);
+}
+
+.generateImageButton:disabled{
+    opacity:.55;
+
+    cursor:not-allowed;
+}
+
+
+/* RESULT */
+
+.imageResult{
+    min-height:590px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.imageEmpty{
+    text-align:center;
+
+    color:#818894;
+}
+
+.imageEmptyIcon{
+    font-size:60px;
+
+    margin-bottom:15px;
+}
+
+.imageEmpty h2{
+    color:#e1e4ea;
+
+    font-size:18px;
+
+    margin-bottom:7px;
+}
+
+.imageEmpty p{
+    font-size:13px;
+}
+
+
+/* LOADING */
+
+.imageLoading{
+    text-align:center;
+}
+
+.imageLoader{
+    width:55px;
+    height:55px;
+
+    margin:
+        0 auto
+        18px;
+
+    border-radius:50%;
+
+    border:
+        4px solid
+        rgba(255,255,255,.1);
+
+    border-top-color:#887bff;
+
+    animation:
+        imageSpin .8s linear infinite;
+}
+
+@keyframes imageSpin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+.imageLoading h2{
+    font-size:18px;
+
+    margin-bottom:6px;
+}
+
+.imageLoading p{
+    color:#838a97;
+
+    font-size:12px;
+}
+
+
+/* GENERATED */
+
+.generatedArea{
+    width:100%;
+}
+
+.generatedImageBox{
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:400px;
+}
+
+#generatedImage{
+    max-width:100%;
+
+    max-height:570px;
+
+    object-fit:contain;
+
+    border-radius:13px;
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.4);
+}
+
+.generatedInfo{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    align-items:center;
+
+    margin-top:13px;
+}
+
+.generatedStatus{
+    color:#858c99;
+
+    font-size:11px;
+}
+
+.resultActions{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:6px;
+
+    justify-content:flex-end;
+}
+
+.resultActions button{
+    border:1px solid var(--border);
+
+    background:#14171e;
+
+    color:#d5d9e0;
+
+    padding:7px 9px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:11px;
+}
+
+.resultActions button:hover{
+    background:#1d2028;
+
+    color:white;
+}
+
+
+/* RECENT */
+
+.recentCreations{
+    max-width:1150px;
+
+    margin:
+        25px auto
+        50px;
+}
+
+.recentHeader{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+}
+
+.recentHeader h2{
+    font-size:16px;
+}
+
+.recentHeader button{
+    border:0;
+
+    background:transparent;
+
+    color:#888f9b;
+
+    cursor:pointer;
+
+    font-size:11px;
+}
+
+.imageHistoryGrid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(150px,1fr)
+        );
+
+    gap:10px;
+}
+
+.historyCard{
+    position:relative;
+
+    border-radius:11px;
+
+    overflow:hidden;
+
+    background:#11141a;
+
+    border:1px solid var(--border);
+
+    cursor:pointer;
+
+    aspect-ratio:1;
+}
+
+.historyCard img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+.historyDelete{
+    position:absolute;
+
+    top:6px;
+    right:6px;
+
+    width:25px;
+    height:25px;
+
+    border:0;
+
+    border-radius:7px;
+
+    background:rgba(0,0,0,.72);
+
+    color:white;
+
+    cursor:pointer;
+
+    opacity:0;
+
+    transition:.2s;
+}
+
+.historyCard:hover .historyDelete{
+    opacity:1;
+}
+
+.noHistory{
+    color:#777e8a;
+
+    font-size:12px;
+
+    padding:20px 0;
+}
+
+
+/* IMAGE VIEWER */
+
+.imageViewer{
+    position:fixed;
+
+    inset:0;
+
+    z-index:20000;
+
+    background:
+        rgba(0,0,0,.94);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px;
+}
+
+.imageViewer.show{
+    display:flex;
+}
+
+.viewerImage{
+    max-width:95vw;
+
+    max-height:90vh;
+
+    object-fit:contain;
+
+    border-radius:8px;
+}
+
+.viewerClose{
+    position:absolute;
+
+    top:15px;
+    right:20px;
+
+    width:42px;
+    height:42px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:#22252c;
+
+    color:white;
+
+    font-size:25px;
+
+    cursor:pointer;
+}
+
+
+/* ==================================================
    MOBILE
-========================= */
+================================================== */
+
+@media(max-width:900px){
+
+    .imageWorkspace{
+        grid-template-columns:1fr;
+    }
+
+    .imageResult{
+        min-height:400px;
+    }
+
+}
 
 @media(max-width:760px){
 
     .sidebar{
         position:fixed;
+
         left:-290px;
+
         top:0;
         bottom:0;
+
         z-index:5000;
+
         transition:.25s;
     }
 
@@ -587,10 +1551,15 @@ select,
 
     .menuButton{
         display:block;
+
         border:0;
+
         background:transparent;
+
         color:white;
+
         font-size:20px;
+
         cursor:pointer;
     }
 
@@ -603,7 +1572,7 @@ select,
     }
 
     .controls select{
-        max-width:110px;
+        max-width:90px;
     }
 
     .messages{
@@ -620,21 +1589,67 @@ select,
         height:120px;
         border-radius:27px;
     }
+
+    .toolBar{
+        padding-left:10px;
+    }
+
+    #imagePage{
+        padding:15px;
+    }
+
+    .imageHeader{
+        align-items:flex-start;
+    }
+
+    .imageTitle h1{
+        font-size:21px;
+    }
+
+    .imageTitleIcon{
+        width:43px;
+        height:43px;
+    }
+
+    .imageOptions{
+        grid-template-columns:1fr;
+    }
+
+    .fullOption{
+        grid-column:auto;
+    }
+
+    .generatedInfo{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .resultActions{
+        justify-content:flex-start;
+    }
+
+    .imageHistoryGrid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <!-- ==================================================
-     OPENING / COVER PAGE
+     SPLASH
 ================================================== -->
 
 <div id="splashScreen">
 
     <div class="splashContent">
 
-        <!-- Put ai-icon.png beside index.html -->
         <img
             src="ai-icon.png"
             class="splashIcon"
@@ -650,6 +1665,7 @@ select,
         </p>
 
         <div class="creatorPlate">
+
             <span class="creatorSmall">
                 Designed &amp; Developed by
             </span>
@@ -657,6 +1673,7 @@ select,
             <span class="creatorName">
                 Vidyajeet Singh
             </span>
+
         </div>
 
     </div>
@@ -665,41 +1682,74 @@ select,
 
 
 <!-- ==================================================
-     MAIN AI APPLICATION
+     APPLICATION
 ================================================== -->
 
 <div id="app">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
 
-        <button class="newChat" onclick="newChat()">
+    <!-- ==================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <button
+            class="newChat"
+            onclick="newChat()"
+        >
             ＋ New Chat
         </button>
 
+
         <div class="searchBox">
+
             <input
                 type="text"
                 id="searchChats"
                 placeholder="Search chats..."
                 oninput="renderHistory()"
             >
+
         </div>
 
-        <div class="chatHistory" id="chatHistory"></div>
+
+        <div
+            class="chatHistory"
+            id="chatHistory"
+        ></div>
+
 
         <div class="sidebarBottom">
+
             <div class="creatorMain">
-                <div class="small">Designed &amp; Developed by</div>
-                <div class="name">Vidyajeet Singh</div>
+
+                <div class="small">
+                    Designed &amp; Developed by
+                </div>
+
+                <div class="name">
+                    Vidyajeet Singh
+                </div>
+
             </div>
+
         </div>
 
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- ==================================================
+         MAIN
+    ================================================== -->
+
     <main class="main">
+
+
+        <!-- TOPBAR -->
 
         <header class="topbar">
 
@@ -710,34 +1760,87 @@ select,
                 ☰
             </button>
 
+
             <div class="brand">
                 Vidyajeet AI Studio
             </div>
 
+
             <div class="controls">
 
                 <select id="persona">
-                    <option value="general">General Assistant</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="legal">Legal Information Assistant</option>
-                    <option value="coding">Coding Expert</option>
-                    <option value="study">Study Assistant</option>
-                    <option value="writer">Creative Writer</option>
+
+                    <option value="general">
+                        General Assistant
+                    </option>
+
+                    <option value="teacher">
+                        Teacher
+                    </option>
+
+                    <option value="legal">
+                        Legal Information Assistant
+                    </option>
+
+                    <option value="coding">
+                        Coding Expert
+                    </option>
+
+                    <option value="study">
+                        Study Assistant
+                    </option>
+
+                    <option value="writer">
+                        Creative Writer
+                    </option>
+
                 </select>
+
 
                 <select id="thinking">
-                    <option value="fast">Fast</option>
-                    <option value="balanced" selected>Balanced</option>
-                    <option value="deep">Deep</option>
+
+                    <option value="fast">
+                        Fast
+                    </option>
+
+                    <option
+                        value="balanced"
+                        selected
+                    >
+                        Balanced
+                    </option>
+
+                    <option value="deep">
+                        Deep
+                    </option>
+
                 </select>
 
+
                 <select id="mode">
-                    <option value="normal">Normal</option>
-                    <option value="study">Study</option>
-                    <option value="coding">Coding</option>
-                    <option value="quiz">Quiz</option>
-                    <option value="flashcards">Flashcards</option>
+
+                    <option value="normal">
+                        Normal
+                    </option>
+
+                    <option value="study">
+                        Study
+                    </option>
+
+                    <option value="coding">
+                        Coding
+                    </option>
+
+                    <option value="quiz">
+                        Quiz
+                    </option>
+
+                    <option value="flashcards">
+                        Flashcards
+                    </option>
+
                 </select>
+
 
                 <button
                     class="topButton"
@@ -752,247 +1855,941 @@ select,
         </header>
 
 
-        <section class="messages" id="messages"></section>
+        <!-- ==================================================
+             TOOL BAR
+        ================================================== -->
+
+        <div class="toolBar">
+
+            <button
+                id="chatToolButton"
+                class="toolButton active"
+                onclick="showTool('chat')"
+            >
+                💬 Chat
+            </button>
 
 
-        <div class="inputArea">
+            <button
+                id="imageToolButton"
+                class="toolButton"
+                onclick="showTool('image')"
+            >
+                🎨 Image Creation
+            </button>
 
-            <div class="inputWrap">
 
-                <textarea
-                    id="messageInput"
-                    rows="1"
-                    placeholder="Message Vidyajeet AI Studio..."
-                ></textarea>
+            <button
+                class="toolButton"
+                onclick="toolComingSoon('Documents')"
+            >
+                📄 Documents
+            </button>
 
-                <div class="inputButtons">
 
-                    <button
-                        class="inputButton"
-                        onclick="startVoice()"
-                        title="Voice input"
-                    >
-                        🎤
-                    </button>
+            <button
+                class="toolButton"
+                onclick="toolComingSoon('Coding')"
+            >
+                💻 Coding
+            </button>
 
-                    <button
-                        class="inputButton sendButton"
-                        onclick="sendMessage()"
-                        title="Send"
-                    >
-                        ➤
-                    </button>
+
+            <button
+                class="toolButton"
+                onclick="toolComingSoon('Study Hub')"
+            >
+                📚 Study Hub
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             CHAT PAGE
+        ================================================== -->
+
+        <section
+            id="chatPage"
+        >
+
+            <section
+                class="messages"
+                id="messages"
+            ></section>
+
+
+            <div class="inputArea">
+
+                <div class="inputWrap">
+
+                    <textarea
+                        id="messageInput"
+                        rows="1"
+                        placeholder="Message Vidyajeet AI Studio..."
+                    ></textarea>
+
+
+                    <div class="inputButtons">
+
+                        <button
+                            class="inputButton"
+                            onclick="startVoice()"
+                            title="Voice input"
+                        >
+                            🎤
+                        </button>
+
+
+                        <button
+                            class="inputButton sendButton"
+                            onclick="sendMessage()"
+                            title="Send"
+                        >
+                            ➤
+                        </button>
+
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
+
+
+        <!-- ==================================================
+             IMAGE PAGE
+        ================================================== -->
+
+        <section
+            id="imagePage"
+        >
+
+
+            <div class="imageHeader">
+
+                <div class="imageTitle">
+
+                    <div class="imageTitleIcon">
+                        🎨
+                    </div>
+
+                    <div>
+
+                        <h1>
+                            Image Creation
+                        </h1>
+
+                        <p>
+                            Create and edit images with AI
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="imageHistoryButton"
+                    onclick="scrollToImageHistory()"
+                >
+                    🕘 History
+                </button>
+
+            </div>
+
+
+            <div class="imageWorkspace">
+
+
+                <!-- ==================================================
+                     PROMPT PANEL
+                ================================================== -->
+
+                <div class="imagePanel">
+
+                    <h3>
+                        Describe your image
+                    </h3>
+
+
+                    <textarea
+                        id="imagePrompt"
+                        class="imagePrompt"
+                        maxlength="5000"
+                        placeholder="Describe what you want to create...&#10;&#10;Example: A futuristic Indian city at sunset, cinematic lighting, detailed architecture, realistic atmosphere."
+                    ></textarea>
+
+
+                    <div class="imagePromptTools">
+
+                        <span>
+                            Natural-language image prompts supported
+                        </span>
+
+                        <span id="imagePromptCount">
+                            0 / 5000
+                        </span>
+
+                    </div>
+
+
+                    <!-- REFERENCE -->
+
+                    <div class="referenceBox">
+
+                        <h3>
+                            Reference images
+                        </h3>
+
+
+                        <input
+                            id="referenceInput"
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp"
+                            multiple
+                            hidden
+                            onchange="handleReferenceImages(event)"
+                        >
+
+
+                        <button
+                            class="referenceButton"
+                            onclick="document.getElementById('referenceInput').click()"
+                        >
+                            📎 Add reference images
+                            <br>
+                            <small>
+                                PNG, JPG or WEBP
+                            </small>
+                        </button>
+
+
+                        <div
+                            id="referencePreview"
+                            class="referencePreview"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="imageOptions">
+
+
+                        <div class="imageOption">
+
+                            <label>
+                                Style
+                            </label>
+
+                            <select id="imageStyle">
+
+                                <option value="Auto">
+                                    Auto
+                                </option>
+
+                                <option value="Photorealistic">
+                                    Photorealistic
+                                </option>
+
+                                <option value="Cinematic">
+                                    Cinematic
+                                </option>
+
+                                <option value="3D">
+                                    3D
+                                </option>
+
+                                <option value="Digital Art">
+                                    Digital Art
+                                </option>
+
+                                <option value="Illustration">
+                                    Illustration
+                                </option>
+
+                                <option value="Anime">
+                                    Anime
+                                </option>
+
+                                <option value="Watercolor">
+                                    Watercolor
+                                </option>
+
+                                <option value="Sketch">
+                                    Sketch
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="imageOption">
+
+                            <label>
+                                Aspect ratio
+                            </label>
+
+                            <select id="imageRatio">
+
+                                <option value="1:1">
+                                    1:1 Square
+                                </option>
+
+                                <option value="16:9">
+                                    16:9 Landscape
+                                </option>
+
+                                <option value="9:16">
+                                    9:16 Portrait
+                                </option>
+
+                                <option value="4:3">
+                                    4:3
+                                </option>
+
+                                <option value="3:4">
+                                    3:4
+                                </option>
+
+                                <option value="3:2">
+                                    3:2
+                                </option>
+
+                                <option value="2:3">
+                                    2:3
+                                </option>
+
+                                <option value="21:9">
+                                    21:9 Wide
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="imageOption fullOption">
+
+                            <label>
+                                Resolution
+                            </label>
+
+                            <select id="imageSize">
+
+                                <option value="512px">
+                                    512px — Fast
+                                </option>
+
+                                <option
+                                    value="1K"
+                                    selected
+                                >
+                                    1K — Standard
+                                </option>
+
+                                <option value="2K">
+                                    2K — High
+                                </option>
+
+                                <option value="4K">
+                                    4K — Ultra
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="generateImageButton"
+                        class="generateImageButton"
+                        onclick="generateImage()"
+                    >
+                        ✨ Generate Image
+                    </button>
+
+                </div>
+
+
+                <!-- ==================================================
+                     RESULT PANEL
+                ================================================== -->
+
+                <div
+                    class="imagePanel imageResult"
+                    id="imageResult"
+                >
+
+
+                    <!-- EMPTY -->
+
+                    <div
+                        id="imageEmpty"
+                        class="imageEmpty"
+                    >
+
+                        <div class="imageEmptyIcon">
+                            🎨
+                        </div>
+
+                        <h2>
+                            Your creation will appear here
+                        </h2>
+
+                        <p>
+                            Describe an image and press Generate Image.
+                        </p>
+
+                    </div>
+
+
+                    <!-- LOADING -->
+
+                    <div
+                        id="imageLoading"
+                        class="imageLoading"
+                        style="display:none;"
+                    >
+
+                        <div class="imageLoader"></div>
+
+                        <h2>
+                            Creating your image...
+                        </h2>
+
+                        <p>
+                            Vidyajeet AI Studio is generating your image.
+                        </p>
+
+                    </div>
+
+
+                    <!-- RESULT -->
+
+                    <div
+                        id="generatedArea"
+                        class="generatedArea"
+                        style="display:none;"
+                    >
+
+                        <div class="generatedImageBox">
+
+                            <img
+                                id="generatedImage"
+                                alt="AI generated image"
+                            >
+
+                        </div>
+
+
+                        <div class="generatedInfo">
+
+                            <div
+                                id="generatedStatus"
+                                class="generatedStatus"
+                            >
+                                Generated by Vidyajeet AI Studio
+                            </div>
+
+
+                            <div class="resultActions">
+
+                                <button
+                                    onclick="regenerateImage()"
+                                >
+                                    ↻ Regenerate
+                                </button>
+
+
+                                <button
+                                    onclick="createVariation()"
+                                >
+                                    ✨ Variation
+                                </button>
+
+
+                                <button
+                                    onclick="editGeneratedImage()"
+                                >
+                                    ✏️ Edit
+                                </button>
+
+
+                                <button
+                                    onclick="downloadGeneratedImage()"
+                                >
+                                    ⬇️ Save
+                                </button>
+
+
+                                <button
+                                    onclick="copyGeneratedImage()"
+                                >
+                                    📋 Copy
+                                </button>
+
+
+                                <button
+                                    onclick="openImageViewer()"
+                                >
+                                    ⛶ Fullscreen
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 RECENT CREATIONS
+            ================================================== -->
+
+            <div
+                id="recentCreations"
+                class="recentCreations"
+            >
+
+                <div class="recentHeader">
+
+                    <h2>
+                        Recent creations
+                    </h2>
+
+                    <button
+                        onclick="clearImageHistory()"
+                    >
+                        Clear history
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="imageHistoryGrid"
+                    class="imageHistoryGrid"
+                ></div>
+
+            </div>
+
+
+        </section>
+
 
     </main>
 
 </div>
 
 
+<!-- ==================================================
+     FULLSCREEN IMAGE VIEWER
+================================================== -->
+
+<div
+    id="imageViewer"
+    class="imageViewer"
+    onclick="closeImageViewer(event)"
+>
+
+    <button
+        class="viewerClose"
+        onclick="closeImageViewer(event)"
+    >
+        ×
+    </button>
+
+
+    <img
+        id="viewerImage"
+        class="viewerImage"
+        alt="Generated image fullscreen"
+    >
+
+</div>
+
+
 <script>
+
+
 /* ==================================================
-   STORAGE
+   CHAT STORAGE
 ================================================== */
 
-const STORAGE_KEY = "myAI_chats";
+const STORAGE_KEY =
+    "myAI_chats";
 
-let chats = JSON.parse(
-    localStorage.getItem(STORAGE_KEY) || "[]"
-);
+let chats =
+    JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "[]"
+    );
 
-let currentChatId = null;
-let isGenerating = false;
+let currentChatId =
+    null;
+
+let isGenerating =
+    false;
 
 
 /* ==================================================
-   INITIALIZE
+   CHAT STORAGE FUNCTIONS
 ================================================== */
 
 function saveChats(){
+
     localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify(chats)
     );
+
 }
+
 
 function createChat(){
 
     const chat = {
-        id: Date.now().toString(),
-        title: "New Chat",
-        messages: [],
-        lastInteractionId: null,
-        favorite: false,
-        pinned: false
+
+        id:
+            Date.now().toString(),
+
+        title:
+            "New Chat",
+
+        messages:
+            [],
+
+        lastInteractionId:
+            null,
+
+        favorite:
+            false,
+
+        pinned:
+            false
+
     };
 
+
     chats.unshift(chat);
+
     saveChats();
 
-    currentChatId = chat.id;
+    currentChatId =
+        chat.id;
 
     renderHistory();
+
     renderMessages();
+
 }
+
 
 function getCurrentChat(){
+
     return chats.find(
-        chat => chat.id === currentChatId
+        chat =>
+            chat.id === currentChatId
     );
+
 }
 
+
 function newChat(){
+
     createChat();
+
+    showTool("chat");
+
 }
 
 
 /* ==================================================
-   HISTORY
+   CHAT HISTORY
 ================================================== */
 
 function renderHistory(){
 
-    const history = document.getElementById("chatHistory");
+    const history =
+        document.getElementById(
+            "chatHistory"
+        );
 
-    const search = (
-        document.getElementById("searchChats")?.value || ""
-    ).toLowerCase();
+
+    const search =
+        (
+            document.getElementById(
+                "searchChats"
+            )?.value || ""
+        ).toLowerCase();
+
 
     history.innerHTML = "";
 
+
     chats
-        .filter(chat =>
-            chat.title.toLowerCase().includes(search)
+
+        .filter(
+            chat =>
+                chat.title
+                    .toLowerCase()
+                    .includes(search)
         )
-        .forEach(chat => {
 
-            const item = document.createElement("div");
+        .forEach(
+            chat => {
 
-            item.className =
-                "chatItem " +
-                (chat.id === currentChatId ? "active" : "");
+                const item =
+                    document.createElement(
+                        "div"
+                    );
 
-            item.innerHTML = `
-                <div class="chatTitle">
-                    ${escapeHTML(chat.pinned ? "📌 " : "")}
-                    ${escapeHTML(chat.title)}
-                </div>
 
-                <div class="chatButtons">
+                item.className =
+                    "chatItem " +
+                    (
+                        chat.id ===
+                        currentChatId
+                        ? "active"
+                        : ""
+                    );
 
-                    <button
-                        onclick="toggleFavorite(event,'${chat.id}')"
-                        title="Favorite"
-                    >
-                        ${chat.favorite ? "★" : "☆"}
-                    </button>
 
-                    <button
-                        onclick="togglePin(event,'${chat.id}')"
-                        title="Pin"
-                    >
-                        📌
-                    </button>
+                item.innerHTML = `
 
-                    <button
-                        onclick="deleteChat(event,'${chat.id}')"
-                        title="Delete"
-                    >
-                        ×
-                    </button>
+                    <div class="chatTitle">
 
-                </div>
-            `;
+                        ${escapeHTML(
+                            chat.pinned
+                            ? "📌 "
+                            : ""
+                        )}
 
-            item.onclick = () => {
-                currentChatId = chat.id;
-                renderHistory();
-                renderMessages();
+                        ${escapeHTML(
+                            chat.title
+                        )}
 
-                if(
-                    window.innerWidth <= 760
-                ){
-                    document
-                        .getElementById("sidebar")
-                        .classList.remove("open");
-                }
-            };
+                    </div>
 
-            history.appendChild(item);
-        });
+
+                    <div class="chatButtons">
+
+                        <button
+                            onclick="toggleFavorite(
+                                event,
+                                '${chat.id}'
+                            )"
+                        >
+                            ${chat.favorite ? "★" : "☆"}
+                        </button>
+
+
+                        <button
+                            onclick="togglePin(
+                                event,
+                                '${chat.id}'
+                            )"
+                        >
+                            📌
+                        </button>
+
+
+                        <button
+                            onclick="deleteChat(
+                                event,
+                                '${chat.id}'
+                            )"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                item.onclick = () => {
+
+                    currentChatId =
+                        chat.id;
+
+                    renderHistory();
+
+                    renderMessages();
+
+                    showTool("chat");
+
+
+                    if(
+                        window.innerWidth <=
+                        760
+                    ){
+
+                        document
+                            .getElementById(
+                                "sidebar"
+                            )
+                            .classList
+                            .remove(
+                                "open"
+                            );
+
+                    }
+
+                };
+
+
+                history.appendChild(item);
+
+            }
+        );
+
 }
 
-function toggleFavorite(event,id){
+
+function toggleFavorite(
+    event,
+    id
+){
 
     event.stopPropagation();
 
-    const chat = chats.find(c => c.id === id);
+
+    const chat =
+        chats.find(
+            c =>
+                c.id === id
+        );
+
 
     if(chat){
-        chat.favorite = !chat.favorite;
+
+        chat.favorite =
+            !chat.favorite;
+
         saveChats();
+
         renderHistory();
+
     }
+
 }
 
-function togglePin(event,id){
+
+function togglePin(
+    event,
+    id
+){
 
     event.stopPropagation();
 
-    const chat = chats.find(c => c.id === id);
+
+    const chat =
+        chats.find(
+            c =>
+                c.id === id
+        );
+
 
     if(chat){
-        chat.pinned = !chat.pinned;
+
+        chat.pinned =
+            !chat.pinned;
+
         saveChats();
+
         renderHistory();
+
     }
+
 }
 
-function deleteChat(event,id){
+
+function deleteChat(
+    event,
+    id
+){
 
     event.stopPropagation();
 
-    chats = chats.filter(c => c.id !== id);
 
-    if(currentChatId === id){
-        currentChatId = null;
+    chats =
+        chats.filter(
+            c =>
+                c.id !== id
+        );
+
+
+    if(
+        currentChatId === id
+    ){
+
+        currentChatId =
+            null;
+
 
         if(chats.length){
-            currentChatId = chats[0].id;
+
+            currentChatId =
+                chats[0].id;
+
         }
         else{
+
             createChat();
+
             return;
+
         }
+
     }
 
+
     saveChats();
+
     renderHistory();
+
     renderMessages();
+
 }
 
 
 /* ==================================================
-   MESSAGES
+   CHAT MESSAGES
 ================================================== */
 
 function renderMessages(){
 
     const container =
-        document.getElementById("messages");
+        document.getElementById(
+            "messages"
+        );
 
-    const chat = getCurrentChat();
+
+    const chat =
+        getCurrentChat();
+
 
     container.innerHTML = "";
 
-    if(!chat || chat.messages.length === 0){
+
+    if(
+        !chat ||
+        chat.messages.length === 0
+    ){
 
         container.innerHTML = `
+
             <div class="welcome">
 
                 <img
@@ -1001,190 +2798,334 @@ function renderMessages(){
                     alt="AI"
                 >
 
+
                 <h2>
                     How can I help you today?
                 </h2>
+
 
                 <p>
                     Welcome to Vidyajeet AI Studio.
                 </p>
 
+
                 <div class="quickPrompts">
 
                     <button
                         class="quickPrompt"
-                        onclick="quickPrompt('Explain this topic simply')"
+                        onclick="
+                            quickPrompt(
+                                'Explain this topic simply'
+                            )
+                        "
                     >
                         📚 Explain a topic
                     </button>
 
+
                     <button
                         class="quickPrompt"
-                        onclick="quickPrompt('Help me write something')"
+                        onclick="
+                            quickPrompt(
+                                'Help me write something'
+                            )
+                        "
                     >
                         ✍️ Help me write
                     </button>
 
+
                     <button
                         class="quickPrompt"
-                        onclick="quickPrompt('Help me with coding')"
+                        onclick="
+                            quickPrompt(
+                                'Help me with coding'
+                            )
+                        "
                     >
                         💻 Coding help
                     </button>
 
+
                     <button
                         class="quickPrompt"
-                        onclick="quickPrompt('Give me a study plan')"
+                        onclick="
+                            quickPrompt(
+                                'Give me a study plan'
+                            )
+                        "
                     >
                         🎓 Study plan
+                    </button>
+
+
+                    <button
+                        class="quickPrompt"
+                        onclick="
+                            showTool('image')
+                        "
+                    >
+                        🎨 Create an image
                     </button>
 
                 </div>
 
             </div>
+
         `;
 
         return;
+
     }
 
-    chat.messages.forEach((message,index) => {
 
-        const wrapper =
-            document.createElement("div");
+    chat.messages.forEach(
+        (message,index) => {
 
-        wrapper.className = "message";
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
 
-        const isUser =
-            message.role === "user";
 
-        wrapper.innerHTML = `
-            <div class="messageRow">
+            wrapper.className =
+                "message";
 
-                <div class="avatar ${isUser ? "user" : "ai"}">
-                    ${isUser ? "U" : "AI"}
-                </div>
 
-                <div class="messageContent">
+            const isUser =
+                message.role ===
+                "user";
 
-                    <div class="role">
-                        ${isUser ? "You" : "Vidyajeet AI"}
+
+            wrapper.innerHTML = `
+
+                <div class="messageRow">
+
+                    <div
+                        class="
+                            avatar
+                            ${isUser ? "user" : "ai"}
+                        "
+                    >
+                        ${isUser ? "U" : "AI"}
                     </div>
 
-                    <div class="text ${
-                        isUser ? "userBubble" : ""
-                    }">
-                        ${
-                            isUser
-                            ? escapeHTML(message.content)
-                            : formatMarkdown(message.content)
-                        }
-                    </div>
 
-                    ${
-                        !isUser
-                        ? `
-                        <div class="answerActions">
+                    <div class="messageContent">
 
-                            <button
-                                onclick="copyText(${index})"
-                            >
-                                Copy
-                            </button>
-
-                            <button
-                                onclick="speakText(${index})"
-                            >
-                                🔊 Speak
-                            </button>
-
+                        <div class="role">
                             ${
-                                index ===
-                                chat.messages.length - 1
-                                ?
-                                `<button onclick="regenerate()">
-                                    Regenerate
-                                </button>`
-                                :
-                                ""
+                                isUser
+                                ? "You"
+                                : "Vidyajeet AI"
                             }
-
                         </div>
-                        `
-                        :
-                        ""
-                    }
+
+
+                        <div
+                            class="
+                                text
+                                ${isUser ? "userBubble" : ""}
+                            "
+                        >
+                            ${
+                                isUser
+
+                                ? escapeHTML(
+                                    message.content
+                                )
+
+                                : formatMarkdown(
+                                    message.content
+                                )
+                            }
+                        </div>
+
+
+                        ${
+                            !isUser
+
+                            ? `
+
+                                <div class="answerActions">
+
+                                    <button
+                                        onclick="
+                                            copyText(
+                                                ${index}
+                                            )
+                                        "
+                                    >
+                                        Copy
+                                    </button>
+
+
+                                    <button
+                                        onclick="
+                                            speakText(
+                                                ${index}
+                                            )
+                                        "
+                                    >
+                                        🔊 Speak
+                                    </button>
+
+
+                                    ${
+                                        index ===
+                                        chat.messages.length - 1
+
+                                        ?
+
+                                        `
+                                            <button
+                                                onclick="
+                                                    regenerate()
+                                                "
+                                            >
+                                                Regenerate
+                                            </button>
+                                        `
+
+                                        :
+
+                                        ""
+                                    }
+
+                                </div>
+
+                            `
+
+                            :
+
+                            ""
+                        }
+
+                    </div>
 
                 </div>
 
-            </div>
-        `;
+            `;
 
-        container.appendChild(wrapper);
-    });
+
+            container.appendChild(
+                wrapper
+            );
+
+        }
+    );
+
 
     container.scrollTop =
         container.scrollHeight;
+
 }
 
 
 /* ==================================================
-   SEND
+   SEND MESSAGE
 ================================================== */
 
 async function sendMessage(){
 
-    if(isGenerating) return;
+    if(isGenerating)
+        return;
+
 
     const input =
-        document.getElementById("messageInput");
+        document.getElementById(
+            "messageInput"
+        );
+
 
     const text =
         input.value.trim();
 
-    if(!text) return;
 
-    let chat = getCurrentChat();
+    if(!text)
+        return;
+
+
+    let chat =
+        getCurrentChat();
+
 
     if(!chat){
+
         createChat();
-        chat = getCurrentChat();
+
+        chat =
+            getCurrentChat();
+
     }
+
 
     chat.messages.push({
-        role:"user",
-        content:text
+
+        role:
+            "user",
+
+        content:
+            text
+
     });
 
+
     if(
-        chat.title === "New Chat"
+        chat.title ===
+        "New Chat"
     ){
+
         chat.title =
             text.length > 35
-            ? text.substring(0,35) + "..."
+
+            ? text.substring(
+                0,
+                35
+            ) + "..."
+
             : text;
+
     }
 
-    input.value = "";
+
+    input.value =
+        "";
+
 
     autoResize(input);
 
     renderHistory();
+
     renderMessages();
 
-    isGenerating = true;
+
+    isGenerating =
+        true;
+
 
     showTyping();
+
 
     try{
 
         const persona =
-            document.getElementById("persona").value;
+            document.getElementById(
+                "persona"
+            ).value;
+
 
         const thinking =
-            document.getElementById("thinking").value;
+            document.getElementById(
+                "thinking"
+            ).value;
+
 
         const mode =
-            document.getElementById("mode").value;
+            document.getElementById(
+                "mode"
+            ).value;
+
 
         const prompt =
             buildPrompt(
@@ -1194,27 +3135,41 @@ async function sendMessage(){
                 mode
             );
 
+
         const response =
             await fetch(
                 "/.netlify/functions/chat",
                 {
-                    method:"POST",
+
+                    method:
+                        "POST",
+
                     headers:{
                         "Content-Type":
                             "application/json"
                     },
-                    body:JSON.stringify({
-                        message:prompt,
-                        previousInteractionId:
-                            chat.lastInteractionId
-                    })
+
+                    body:
+                        JSON.stringify({
+
+                            message:
+                                prompt,
+
+                            previousInteractionId:
+                                chat.lastInteractionId
+
+                        })
+
                 }
             );
+
 
         const data =
             await response.json();
 
+
         removeTyping();
+
 
         if(!response.ok){
 
@@ -1222,39 +3177,66 @@ async function sendMessage(){
                 data.error ||
                 "Something went wrong."
             );
+
         }
 
+
         chat.messages.push({
-            role:"assistant",
-            content:data.answer || "No response received."
+
+            role:
+                "assistant",
+
+            content:
+                data.answer ||
+                "No response received."
+
         });
 
+
         chat.lastInteractionId =
-            data.interactionId || null;
+            data.interactionId ||
+            null;
+
 
         saveChats();
+
         renderMessages();
 
     }
+
+
     catch(error){
 
         removeTyping();
 
+
         chat.messages.push({
-            role:"assistant",
+
+            role:
+                "assistant",
+
             content:
                 "Sorry, I couldn't get a response right now.\n\n" +
                 "**Error:** " +
                 error.message
+
         });
 
+
         saveChats();
+
         renderMessages();
 
     }
+
+
     finally{
-        isGenerating = false;
+
+        isGenerating =
+            false;
+
     }
+
 }
 
 
@@ -1288,7 +3270,9 @@ function buildPrompt(
 
         writer:
             "Act as a creative writing assistant. Produce natural, polished writing."
+
     };
+
 
     const modes = {
 
@@ -1306,7 +3290,9 @@ function buildPrompt(
 
         flashcards:
             "Structure useful information as concise flashcard-style material."
+
     };
+
 
     const thinkingInstructions = {
 
@@ -1318,9 +3304,12 @@ function buildPrompt(
 
         deep:
             "Analyze the problem carefully and provide a thorough answer."
+
     };
 
+
     return `
+
 ${personas[persona]}
 
 ${modes[mode]}
@@ -1331,7 +3320,9 @@ Use Markdown when useful.
 
 User request:
 ${text}
+
 `;
+
 }
 
 
@@ -1342,18 +3333,33 @@ ${text}
 function showTyping(){
 
     const container =
-        document.getElementById("messages");
+        document.getElementById(
+            "messages"
+        );
+
 
     const typing =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    typing.id = "typingIndicator";
-    typing.className = "message";
+
+    typing.id =
+        "typingIndicator";
+
+
+    typing.className =
+        "message";
+
 
     typing.innerHTML = `
+
         <div class="messageRow">
 
-            <div class="avatar ai">AI</div>
+            <div class="avatar ai">
+                AI
+            </div>
+
 
             <div class="messageContent">
 
@@ -1361,70 +3367,116 @@ function showTyping(){
                     Vidyajeet AI
                 </div>
 
+
                 <div class="typing">
+
                     <span></span>
                     <span></span>
                     <span></span>
+
                 </div>
 
             </div>
 
         </div>
+
     `;
 
-    container.appendChild(typing);
+
+    container.appendChild(
+        typing
+    );
+
 
     container.scrollTop =
         container.scrollHeight;
+
 }
+
 
 function removeTyping(){
 
     document
-        .getElementById("typingIndicator")
+        .getElementById(
+            "typingIndicator"
+        )
         ?.remove();
+
 }
 
 
 /* ==================================================
-   REGENERATE
+   REGENERATE CHAT
 ================================================== */
 
 async function regenerate(){
 
-    if(isGenerating) return;
-
-    const chat = getCurrentChat();
-
-    if(!chat || chat.messages.length < 2)
+    if(isGenerating)
         return;
+
+
+    const chat =
+        getCurrentChat();
+
+
+    if(
+        !chat ||
+        chat.messages.length < 2
+    )
+        return;
+
 
     const last =
-        chat.messages[chat.messages.length - 1];
+        chat.messages[
+            chat.messages.length - 1
+        ];
 
-    if(last.role !== "assistant")
+
+    if(
+        last.role !==
+        "assistant"
+    )
         return;
 
+
     const userMessage =
-        chat.messages[chat.messages.length - 2];
+        chat.messages[
+            chat.messages.length - 2
+        ];
+
 
     chat.messages.pop();
 
+
     renderMessages();
 
-    isGenerating = true;
+
+    isGenerating =
+        true;
+
+
     showTyping();
+
 
     try{
 
         const persona =
-            document.getElementById("persona").value;
+            document.getElementById(
+                "persona"
+            ).value;
+
 
         const thinking =
-            document.getElementById("thinking").value;
+            document.getElementById(
+                "thinking"
+            ).value;
+
 
         const mode =
-            document.getElementById("mode").value;
+            document.getElementById(
+                "mode"
+            ).value;
+
 
         const prompt =
             buildPrompt(
@@ -1434,26 +3486,41 @@ async function regenerate(){
                 mode
             );
 
+
         const response =
             await fetch(
                 "/.netlify/functions/chat",
                 {
-                    method:"POST",
+
+                    method:
+                        "POST",
+
                     headers:{
                         "Content-Type":
                             "application/json"
                     },
-                    body:JSON.stringify({
-                        message:prompt,
-                        previousInteractionId:null
-                    })
+
+                    body:
+                        JSON.stringify({
+
+                            message:
+                                prompt,
+
+                            previousInteractionId:
+                                null
+
+                        })
+
                 }
             );
+
 
         const data =
             await response.json();
 
+
         removeTyping();
+
 
         if(!response.ok)
             throw new Error(
@@ -1461,93 +3528,140 @@ async function regenerate(){
                 "Unable to regenerate."
             );
 
+
         chat.messages.push({
-            role:"assistant",
-            content:data.answer
+
+            role:
+                "assistant",
+
+            content:
+                data.answer
+
         });
 
+
         chat.lastInteractionId =
-            data.interactionId || null;
+            data.interactionId ||
+            null;
+
 
         saveChats();
+
         renderMessages();
 
     }
+
+
     catch(error){
 
         removeTyping();
 
+
         chat.messages.push({
-            role:"assistant",
+
+            role:
+                "assistant",
+
             content:
                 "Regeneration failed: " +
                 error.message
+
         });
 
+
         saveChats();
+
         renderMessages();
 
     }
+
+
     finally{
-        isGenerating = false;
+
+        isGenerating =
+            false;
+
     }
+
 }
 
 
 /* ==================================================
-   COPY
+   COPY CHAT
 ================================================== */
 
 function copyText(index){
 
-    const chat = getCurrentChat();
+    const chat =
+        getCurrentChat();
 
-    if(!chat) return;
+
+    if(!chat)
+        return;
+
 
     const message =
         chat.messages[index];
 
-    if(!message) return;
+
+    if(!message)
+        return;
+
 
     navigator.clipboard.writeText(
         message.content
     );
+
 }
 
 
 /* ==================================================
-   TEXT TO SPEECH
+   SPEECH
 ================================================== */
 
 function speakText(index){
 
-    const chat = getCurrentChat();
+    const chat =
+        getCurrentChat();
 
-    if(!chat) return;
+
+    if(!chat)
+        return;
+
 
     const message =
         chat.messages[index];
 
-    if(!message) return;
 
-    if("speechSynthesis" in window){
+    if(!message)
+        return;
+
+
+    if(
+        "speechSynthesis"
+        in window
+    ){
 
         speechSynthesis.cancel();
+
 
         const utterance =
             new SpeechSynthesisUtterance(
                 message.content
             );
 
+
         speechSynthesis.speak(
             utterance
         );
+
     }
+
 }
 
 
 /* ==================================================
-   VOICE INPUT
+   VOICE
 ================================================== */
 
 function startVoice(){
@@ -1556,6 +3670,7 @@ function startVoice(){
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
 
+
     if(!SpeechRecognition){
 
         alert(
@@ -1563,29 +3678,43 @@ function startVoice(){
         );
 
         return;
+
     }
+
 
     const recognition =
         new SpeechRecognition();
 
-    recognition.lang = "en-IN";
-    recognition.interimResults = false;
 
-    recognition.onresult = event => {
+    recognition.lang =
+        "en-IN";
 
-        document.getElementById(
-            "messageInput"
-        ).value =
-            event.results[0][0].transcript;
 
-        autoResize(
-            document.getElementById(
-                "messageInput"
-            )
-        );
-    };
+    recognition.interimResults =
+        false;
+
+
+    recognition.onresult =
+        event => {
+
+            const input =
+                document.getElementById(
+                    "messageInput"
+                );
+
+
+            input.value =
+                event.results[0][0]
+                    .transcript;
+
+
+            autoResize(input);
+
+        };
+
 
     recognition.start();
+
 }
 
 
@@ -1600,11 +3729,15 @@ function quickPrompt(text){
             "messageInput"
         );
 
-    input.value = text;
+
+    input.value =
+        text;
+
 
     autoResize(input);
 
     input.focus();
+
 }
 
 
@@ -1617,11 +3750,13 @@ function formatMarkdown(text){
     let html =
         escapeHTML(text);
 
+
     html =
         html.replace(
             /```([\s\S]*?)```/g,
-            '<pre><code>$1</code></pre>'
+            "<pre><code>$1</code></pre>"
         );
+
 
     html =
         html.replace(
@@ -1629,11 +3764,13 @@ function formatMarkdown(text){
             '<span class="inlineCode">$1</span>'
         );
 
+
     html =
         html.replace(
             /\*\*(.*?)\*\*/g,
             "<strong>$1</strong>"
         );
+
 
     html =
         html.replace(
@@ -1641,11 +3778,13 @@ function formatMarkdown(text){
             "<em>$1</em>"
         );
 
+
     html =
         html.replace(
             /^### (.*)$/gm,
             "<h3>$1</h3>"
         );
+
 
     html =
         html.replace(
@@ -1653,11 +3792,13 @@ function formatMarkdown(text){
             "<h2>$1</h2>"
         );
 
+
     html =
         html.replace(
             /^# (.*)$/gm,
             "<h1>$1</h1>"
         );
+
 
     html =
         html.replace(
@@ -1665,17 +3806,26 @@ function formatMarkdown(text){
             "<br>"
         );
 
+
     return html;
+
 }
+
 
 function escapeHTML(text){
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    div.textContent = text;
+
+    div.textContent =
+        text;
+
 
     return div.innerHTML;
+
 }
 
 
@@ -1688,48 +3838,66 @@ const messageInput =
         "messageInput"
     );
 
+
 messageInput.addEventListener(
     "input",
-    () => autoResize(messageInput)
+    () =>
+        autoResize(
+            messageInput
+        )
 );
+
 
 messageInput.addEventListener(
     "keydown",
     event => {
 
         if(
-            event.key === "Enter" &&
+            event.key ===
+            "Enter" &&
             !event.shiftKey
         ){
 
             event.preventDefault();
 
             sendMessage();
+
         }
+
     }
 );
 
+
 function autoResize(element){
 
-    element.style.height = "auto";
+    element.style.height =
+        "auto";
+
 
     element.style.height =
         Math.min(
             element.scrollHeight,
             150
         ) + "px";
+
 }
 
 
 /* ==================================================
-   MOBILE SIDEBAR
+   SIDEBAR
 ================================================== */
 
 function toggleSidebar(){
 
     document
-        .getElementById("sidebar")
-        .classList.toggle("open");
+        .getElementById(
+            "sidebar"
+        )
+        .classList
+        .toggle(
+            "open"
+        );
+
 }
 
 
@@ -1740,11 +3908,15 @@ function toggleSidebar(){
 function toggleTheme(){
 
     const light =
-        document.body.dataset.theme === "light";
+        document.body.dataset.theme ===
+        "light";
+
 
     if(light){
 
-        document.body.dataset.theme = "";
+        document.body.dataset.theme =
+            "";
+
 
         document.documentElement.style
             .setProperty(
@@ -1752,11 +3924,13 @@ function toggleTheme(){
                 "#08090d"
             );
 
+
         document.documentElement.style
             .setProperty(
                 "--panel",
                 "#101218"
             );
+
 
         document.documentElement.style
             .setProperty(
@@ -1765,9 +3939,13 @@ function toggleTheme(){
             );
 
     }
+
+
     else{
 
-        document.body.dataset.theme = "light";
+        document.body.dataset.theme =
+            "light";
+
 
         document.documentElement.style
             .setProperty(
@@ -1775,18 +3953,1217 @@ function toggleTheme(){
                 "#f5f6f8"
             );
 
+
         document.documentElement.style
             .setProperty(
                 "--panel",
                 "#ffffff"
             );
 
+
         document.documentElement.style
             .setProperty(
                 "--text",
                 "#17191f"
             );
+
     }
+
+}
+
+
+/* ==================================================
+   TOOL SWITCHING
+================================================== */
+
+function showTool(tool){
+
+    const chatPage =
+        document.getElementById(
+            "chatPage"
+        );
+
+
+    const imagePage =
+        document.getElementById(
+            "imagePage"
+        );
+
+
+    const chatButton =
+        document.getElementById(
+            "chatToolButton"
+        );
+
+
+    const imageButton =
+        document.getElementById(
+            "imageToolButton"
+        );
+
+
+    if(tool === "image"){
+
+        chatPage.style.display =
+            "none";
+
+
+        imagePage.classList.add(
+            "active"
+        );
+
+
+        chatButton.classList.remove(
+            "active"
+        );
+
+
+        imageButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+    else{
+
+        chatPage.style.display =
+            "flex";
+
+
+        imagePage.classList.remove(
+            "active"
+        );
+
+
+        chatButton.classList.add(
+            "active"
+        );
+
+
+        imageButton.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if(
+        window.innerWidth <=
+        760
+    ){
+
+        document
+            .getElementById(
+                "sidebar"
+            )
+            .classList
+            .remove(
+                "open"
+            );
+
+    }
+
+}
+
+
+function toolComingSoon(name){
+
+    alert(
+        name +
+        " is planned for a future version."
+    );
+
+}
+
+
+/* ==================================================
+   IMAGE CREATION VARIABLES
+================================================== */
+
+let currentImage =
+    null;
+
+let currentImageInteractionId =
+    null;
+
+let lastImagePrompt =
+    "";
+
+let referenceImages =
+    [];
+
+const IMAGE_HISTORY_KEY =
+    "vidyajeet_image_history";
+
+
+/* ==================================================
+   IMAGE PROMPT COUNTER
+================================================== */
+
+document
+    .getElementById(
+        "imagePrompt"
+    )
+    .addEventListener(
+        "input",
+        function(){
+
+            document.getElementById(
+                "imagePromptCount"
+            ).textContent =
+                this.value.length +
+                " / 5000";
+
+        }
+    );
+
+
+/* ==================================================
+   REFERENCE IMAGE UPLOAD
+================================================== */
+
+function handleReferenceImages(event){
+
+    const files =
+        Array.from(
+            event.target.files
+        );
+
+
+    if(!files.length)
+        return;
+
+
+    const available =
+        14 -
+        referenceImages.length;
+
+
+    files
+        .slice(
+            0,
+            available
+        )
+        .forEach(
+            file => {
+
+                if(
+                    ![
+                        "image/png",
+                        "image/jpeg",
+                        "image/webp"
+                    ].includes(
+                        file.type
+                    )
+                )
+                    return;
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    function(e){
+
+                        const dataURL =
+                            e.target.result;
+
+
+                        const base64 =
+                            dataURL.split(
+                                ","
+                            )[1];
+
+
+                        referenceImages.push({
+
+                            id:
+                                Date.now() +
+                                Math.random(),
+
+                            mimeType:
+                                file.type,
+
+                            data:
+                                base64,
+
+                            preview:
+                                dataURL
+
+                        });
+
+
+                        renderReferenceImages();
+
+                    };
+
+
+                reader.readAsDataURL(
+                    file
+                );
+
+            }
+        );
+
+
+    event.target.value =
+        "";
+
+}
+
+
+/* ==================================================
+   REFERENCE PREVIEW
+================================================== */
+
+function renderReferenceImages(){
+
+    const container =
+        document.getElementById(
+            "referencePreview"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    referenceImages.forEach(
+        item => {
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+
+            wrapper.className =
+                "referenceItem";
+
+
+            wrapper.innerHTML = `
+
+                <img
+                    src="${item.preview}"
+                    class="referenceThumb"
+                    alt="Reference"
+                >
+
+
+                <button
+                    class="removeReference"
+                    onclick="
+                        removeReferenceImage(
+                            '${item.id}'
+                        )
+                    "
+                >
+                    ×
+                </button>
+
+            `;
+
+
+            container.appendChild(
+                wrapper
+            );
+
+        }
+    );
+
+}
+
+
+function removeReferenceImage(id){
+
+    referenceImages =
+        referenceImages.filter(
+            item =>
+                String(item.id) !==
+                String(id)
+        );
+
+
+    renderReferenceImages();
+
+}
+
+
+/* ==================================================
+   BUILD IMAGE PROMPT
+================================================== */
+
+function buildImagePrompt(){
+
+    const prompt =
+        document.getElementById(
+            "imagePrompt"
+        ).value.trim();
+
+
+    const style =
+        document.getElementById(
+            "imageStyle"
+        ).value;
+
+
+    if(!prompt)
+        return "";
+
+
+    if(style === "Auto")
+        return prompt;
+
+
+    return `
+
+${prompt}
+
+Visual style:
+${style}
+
+Create the final image according to the user's request.
+
+`;
+
+}
+
+
+/* ==================================================
+   IMAGE GENERATION
+================================================== */
+
+async function generateImage(
+    customPrompt = null,
+    previousInteraction = null
+){
+
+    if(
+        document.getElementById(
+            "generateImageButton"
+        ).disabled
+    )
+        return;
+
+
+    const prompt =
+        customPrompt ||
+        buildImagePrompt();
+
+
+    if(!prompt){
+
+        alert(
+            "Please describe the image you want to create."
+        );
+
+        return;
+
+    }
+
+
+    lastImagePrompt =
+        prompt;
+
+
+    setImageLoading(
+        true
+    );
+
+
+    try{
+
+        const ratio =
+            document.getElementById(
+                "imageRatio"
+            ).value;
+
+
+        const size =
+            document.getElementById(
+                "imageSize"
+            ).value;
+
+
+        const payload = {
+
+            prompt:
+                prompt,
+
+            aspectRatio:
+                ratio,
+
+            imageSize:
+                size,
+
+            referenceImages:
+                referenceImages.map(
+                    item => ({
+
+                        mimeType:
+                            item.mimeType,
+
+                        data:
+                            item.data
+
+                    })
+                ),
+
+            previousInteractionId:
+                previousInteraction
+
+        };
+
+
+        const response =
+            await fetch(
+                "/.netlify/functions/image",
+                {
+
+                    method:
+                        "POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            payload
+                        )
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data.error ||
+                "Image generation failed."
+            );
+
+        }
+
+
+        if(!data.image){
+
+            throw new Error(
+                "The AI returned no image."
+            );
+
+        }
+
+
+        currentImage =
+            data.image;
+
+
+        currentImageInteractionId =
+            data.interactionId ||
+            null;
+
+
+        document.getElementById(
+            "generatedImage"
+        ).src =
+            currentImage;
+
+
+        document.getElementById(
+            "generatedStatus"
+        ).textContent =
+            "Generated by Vidyajeet AI Studio";
+
+
+        document.getElementById(
+            "imageEmpty"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "imageLoading"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "generatedArea"
+        ).style.display =
+            "block";
+
+
+        saveImageHistory(
+
+            currentImage,
+
+            prompt
+
+        );
+
+    }
+
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to create the image."
+        );
+
+
+        setImageLoading(
+            false
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   IMAGE LOADING
+================================================== */
+
+function setImageLoading(
+    loading
+){
+
+    const empty =
+        document.getElementById(
+            "imageEmpty"
+        );
+
+
+    const loader =
+        document.getElementById(
+            "imageLoading"
+        );
+
+
+    const result =
+        document.getElementById(
+            "generatedArea"
+        );
+
+
+    const button =
+        document.getElementById(
+            "generateImageButton"
+        );
+
+
+    if(loading){
+
+        empty.style.display =
+            "none";
+
+
+        result.style.display =
+            "none";
+
+
+        loader.style.display =
+            "block";
+
+
+        button.disabled =
+            true;
+
+
+        button.textContent =
+            "✨ Creating...";
+
+    }
+
+
+    else{
+
+        loader.style.display =
+            "none";
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "✨ Generate Image";
+
+    }
+
+}
+
+
+/* ==================================================
+   REGENERATE
+================================================== */
+
+function regenerateImage(){
+
+    if(!lastImagePrompt)
+        return;
+
+
+    generateImage(
+        lastImagePrompt,
+        null
+    );
+
+}
+
+
+/* ==================================================
+   VARIATION
+================================================== */
+
+function createVariation(){
+
+    if(!lastImagePrompt)
+        return;
+
+
+    const variation =
+        `
+
+Create a fresh visual variation of this image concept.
+
+Keep the main subject and idea,
+but change the composition,
+camera angle, environment,
+lighting and visual details.
+
+Original request:
+${lastImagePrompt}
+
+`;
+
+
+    generateImage(
+        variation,
+        null
+    );
+
+}
+
+
+/* ==================================================
+   EDIT GENERATED IMAGE
+================================================== */
+
+function editGeneratedImage(){
+
+    if(
+        !currentImageInteractionId
+    ){
+
+        alert(
+            "This image does not have an editable interaction available."
+        );
+
+        return;
+
+    }
+
+
+    const edit =
+        window.prompt(
+            "What would you like to change?"
+        );
+
+
+    if(!edit)
+        return;
+
+
+    generateImage(
+        edit,
+        currentImageInteractionId
+    );
+
+}
+
+
+/* ==================================================
+   DOWNLOAD
+================================================== */
+
+function downloadGeneratedImage(){
+
+    if(!currentImage)
+        return;
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        currentImage;
+
+
+    link.download =
+        "vidyajeet-ai-creation.png";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+}
+
+
+/* ==================================================
+   COPY IMAGE
+================================================== */
+
+async function copyGeneratedImage(){
+
+    if(!currentImage)
+        return;
+
+
+    try{
+
+        if(
+            !navigator.clipboard ||
+            !window.ClipboardItem
+        ){
+
+            throw new Error(
+                "Clipboard image support is unavailable."
+            );
+
+        }
+
+
+        const response =
+            await fetch(
+                currentImage
+            );
+
+
+        const blob =
+            await response.blob();
+
+
+        await navigator.clipboard.write([
+
+            new ClipboardItem({
+
+                [blob.type]:
+                    blob
+
+            })
+
+        ]);
+
+
+        alert(
+            "Image copied."
+        );
+
+    }
+
+
+    catch(error){
+
+        alert(
+            "Image copying is not supported here. Use Save instead."
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   FULLSCREEN
+================================================== */
+
+function openImageViewer(){
+
+    if(!currentImage)
+        return;
+
+
+    document.getElementById(
+        "viewerImage"
+    ).src =
+        currentImage;
+
+
+    document.getElementById(
+        "imageViewer"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+function closeImageViewer(event){
+
+    if(event)
+        event.stopPropagation();
+
+
+    document.getElementById(
+        "imageViewer"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+/* ==================================================
+   IMAGE HISTORY
+================================================== */
+
+function getImageHistory(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                IMAGE_HISTORY_KEY
+            ) || "[]"
+        );
+
+    }
+
+    catch{
+
+        return [];
+
+    }
+
+}
+
+
+function saveImageHistory(
+    image,
+    prompt
+){
+
+    let history =
+        getImageHistory();
+
+
+    history.unshift({
+
+        image:
+            image,
+
+        prompt:
+            prompt,
+
+        date:
+            Date.now()
+
+    });
+
+
+    /*
+      Keep the newest 12 creations.
+      This prevents browser storage from growing
+      without limit.
+    */
+
+    history =
+        history.slice(
+            0,
+            12
+        );
+
+
+    try{
+
+        localStorage.setItem(
+            IMAGE_HISTORY_KEY,
+            JSON.stringify(
+                history
+            )
+        );
+
+    }
+
+    catch(error){
+
+        console.warn(
+            "Image history could not be saved.",
+            error
+        );
+
+    }
+
+
+    renderImageHistory();
+
+}
+
+
+/* ==================================================
+   RENDER IMAGE HISTORY
+================================================== */
+
+function renderImageHistory(){
+
+    const container =
+        document.getElementById(
+            "imageHistoryGrid"
+        );
+
+
+    const history =
+        getImageHistory();
+
+
+    container.innerHTML =
+        "";
+
+
+    if(!history.length){
+
+        container.innerHTML = `
+
+            <div class="noHistory">
+                Your generated images will appear here.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    history.forEach(
+        (item,index) => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "historyCard";
+
+
+            card.innerHTML = `
+
+                <img
+                    src="${item.image}"
+                    alt="Saved AI creation"
+                >
+
+
+                <button
+                    class="historyDelete"
+                    title="Delete"
+                >
+                    ×
+                </button>
+
+            `;
+
+
+            card.onclick =
+                function(){
+
+                    loadHistoryImage(
+                        index
+                    );
+
+                };
+
+
+            card.querySelector(
+                ".historyDelete"
+            ).onclick =
+                function(event){
+
+                    event.stopPropagation();
+
+                    deleteHistoryImage(
+                        index
+                    );
+
+                };
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   LOAD HISTORY IMAGE
+================================================== */
+
+function loadHistoryImage(
+    index
+){
+
+    const history =
+        getImageHistory();
+
+
+    const item =
+        history[index];
+
+
+    if(!item)
+        return;
+
+
+    currentImage =
+        item.image;
+
+
+    lastImagePrompt =
+        item.prompt || "";
+
+
+    currentImageInteractionId =
+        null;
+
+
+    document.getElementById(
+        "generatedImage"
+    ).src =
+        currentImage;
+
+
+    document.getElementById(
+        "generatedStatus"
+    ).textContent =
+        "Loaded from image history";
+
+
+    document.getElementById(
+        "imageEmpty"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "imageLoading"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "generatedArea"
+    ).style.display =
+        "block";
+
+
+    showTool(
+        "image"
+    );
+
+}
+
+
+/* ==================================================
+   DELETE HISTORY ITEM
+================================================== */
+
+function deleteHistoryImage(
+    index
+){
+
+    const history =
+        getImageHistory();
+
+
+    history.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        IMAGE_HISTORY_KEY,
+        JSON.stringify(
+            history
+        )
+    );
+
+
+    renderImageHistory();
+
+}
+
+
+/* ==================================================
+   CLEAR HISTORY
+================================================== */
+
+function clearImageHistory(){
+
+    if(
+        !confirm(
+            "Clear all saved image history?"
+        )
+    )
+        return;
+
+
+    localStorage.removeItem(
+        IMAGE_HISTORY_KEY
+    );
+
+
+    renderImageHistory();
+
+}
+
+
+/* ==================================================
+   SCROLL HISTORY
+================================================== */
+
+function scrollToImageHistory(){
+
+    document
+        .getElementById(
+            "recentCreations"
+        )
+        .scrollIntoView({
+            behavior:
+                "smooth"
+        });
+
 }
 
 
@@ -1801,26 +5178,45 @@ function openApplication(){
             "splashScreen"
         );
 
+
     const app =
-        document.getElementById("app");
+        document.getElementById(
+            "app"
+        );
 
-    splash.classList.add("hide");
 
-    app.classList.add("show");
+    splash.classList.add(
+        "hide"
+    );
+
+
+    app.classList.add(
+        "show"
+    );
+
 
     if(!chats.length){
 
         createChat();
 
     }
+
+
     else{
 
         currentChatId =
             chats[0].id;
 
+
         renderHistory();
+
         renderMessages();
+
     }
+
+
+    renderImageHistory();
+
 }
 
 
@@ -1832,16 +5228,11 @@ window.addEventListener(
     "load",
     () => {
 
-        /*
-         * The cover remains visible long enough
-         * for the icon, title and creator plate
-         * to appear before entering the AI.
-         */
-
         setTimeout(
             openApplication,
             3200
         );
+
     }
 );
 
