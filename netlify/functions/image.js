@@ -1,463 +1,267 @@
 exports.handler = async function (event) {
-
+    // Only allow POST
     if (event.httpMethod !== "POST") {
-
         return {
             statusCode: 405,
-
             headers: {
-                "Content-Type":
-                    "application/json"
+                "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
-                error:
-                    "Method not allowed."
+                error: "Method not allowed."
             })
         };
-
     }
 
-
-    const apiKey =
-        process.env.GEMINI_API_KEY;
-
+    // Get API key from Netlify environment variables
+    const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-
         return {
             statusCode: 500,
-
             headers: {
-                "Content-Type":
-                    "application/json"
+                "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
-                error:
-                    "GEMINI_API_KEY is not configured in Netlify."
+                error: "GEMINI_API_KEY is not configured in Netlify."
             })
         };
-
     }
 
-
     try {
+        // Parse request
+        const body = JSON.parse(event.body || "{}");
 
-        const body =
-            JSON.parse(
-                event.body || "{}"
-            );
-
-
-        const prompt =
-            String(
-                body.prompt || ""
-            ).trim();
-
+        const prompt = String(body.prompt || "").trim();
 
         if (!prompt) {
-
             return {
                 statusCode: 400,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    error: "Please enter an image description."
+                })
+            };
+        }
+
+        const aspectRatio = body.aspectRatio || "1:1";
+        const imageSize = body.imageSize || "1K";
+
+        const previousInteractionId =
+            body.previousInteractionId || null;
+
+        // Reference images
+        const referenceImages =
+            Array.isArray(body.referenceImages)
+                ? body.referenceImages
+                : [];
+
+        // Maximum 14 reference images
+        const safeReferences = referenceImages
+            .slice(0, 14)
+            .filter(function (image) {
+                return (
+                    image &&
+                    image.data &&
+                    image.mimeType
+                );
+            });
+
+        // Build Gemini input
+        const input = [
+            {
+                type: "text",
+                text:
+                    `Create an image based on the following request.
+
+User request:
+${prompt}`
+            }
+        ];
+
+        // Add reference images
+        for (const image of safeReferences) {
+            input.push({
+                type: "image",
+                mime_type: image.mimeType,
+                data: image.data
+            });
+        }
+
+        // Gemini request
+        const requestBody = {
+            model: "gemini-3.1-flash-image",
+
+            input: input,
+
+            response_format: {
+                type: "image",
+                mime_type: "image/png",
+                aspect_ratio: aspectRatio,
+                image_size: imageSize
+            }
+        };
+
+        // Continue previous image interaction when editing
+        if (previousInteractionId) {
+            requestBody.previous_interaction_id =
+                previousInteractionId;
+        }
+
+        // Call Gemini Interactions API
+        const response = await fetch(
+            "https://generativelanguage.googleapis.com/v1beta/interactions",
+            {
+                method: "POST",
 
                 headers: {
-                    "Content-Type":
-                        "application/json"
+                    "Content-Type": "application/json",
+                    "x-goog-api-key": apiKey
+                },
+
+                body: JSON.stringify(requestBody)
+            }
+        );
+
+        const data = await response.json();
+
+        // Gemini returned an error
+        if (!response.ok) {
+            console.error(
+                "Gemini API error:",
+                JSON.stringify(data)
+            );
+
+            return {
+                statusCode: response.status,
+
+                headers: {
+                    "Content-Type": "application/json"
                 },
 
                 body: JSON.stringify({
                     error:
-                        "Please enter an image description."
+                        data?.error?.message ||
+                        data?.message ||
+                        "Gemini image generation failed."
                 })
             };
-
         }
 
-
-        const aspectRatio =
-            body.aspectRatio || "1:1";
-
-
-        const imageSize =
-            body.imageSize || "1K";
-
-
-        const previousInteractionId =
-            body.previousInteractionId ||
-            null;
-
-
-        const referenceImages =
-            Array.isArray(
-                body.referenceImages
-            )
-            ? body.referenceImages
-            : [];
-
-
-        /*
-         * Keep the request within the documented
-         * reference-image capability.
-         */
-
-        const safeReferences =
-            referenceImages
-                .slice(0, 14)
-                .filter(
-                    image =>
-                        image &&
-                        image.data &&
-                        image.mimeType
-                );
-
-
-        /*
-         * Build multimodal input.
-         *
-         * Text is included first.
-         * Reference images are then supplied
-         * as visual context.
-         */
-
-        const input = [
-
-            {
-                type:
-                    "text",
-
-                text:
-                    `Create an image according to this request.
-
-User request:
-${prompt}
-
-Follow the normal safety policies of the image model.
-Do not attempt to bypass safety restrictions.`
-
-            }
-
-        ];
-
-
-        for (
-            const image
-            of safeReferences
-        ) {
-
-            input.push({
-
-                type:
-                    "image",
-
-                mime_type:
-                    image.mimeType,
-
-                data:
-                    image.data
-
-            });
-
-        }
-
-
-        const requestBody = {
-
-            model:
-                "gemini-3.1-flash-image",
-
-            input:
-                input,
-
-            response_format: {
-
-                type:
-                    "image",
-
-                mime_type:
-                    "image/png",
-
-                aspect_ratio:
-                    aspectRatio,
-
-                image_size:
-                    imageSize
-
-            }
-
-        };
-
-
-        /*
-         * Continue an existing interaction
-         * when the user is editing an image.
-         */
-
-        if (
-            previousInteractionId
-        ) {
-
-            requestBody
-                .previous_interaction_id =
-                    previousInteractionId;
-
-        }
-
-
-        const response =
-            await fetch(
-
-                "https://generativelanguage.googleapis.com/v1beta/interactions",
-
-                {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json",
-
-                        "x-goog-api-key":
-                            apiKey
-
-                    },
-
-                    body:
-                        JSON.stringify(
-                            requestBody
-                        )
-
-                }
-
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if (!response.ok) {
-
-            console.error(
-                "Gemini API error:",
-                data
-            );
-
-
-            return {
-
-                statusCode:
-                    response.status,
-
-                headers: {
-
-                    "Content-Type":
-                        "application/json"
-
-                },
-
-                body:
-                    JSON.stringify({
-
-                        error:
-                            data?.error?.message ||
-                            data?.message ||
-                            "Gemini image generation failed."
-
-                    })
-
-            };
-
-        }
-
-
-        /*
-         * The current Interactions API exposes
-         * the last generated image through
-         * output_image.
-         */
-
-        let imageData =
-            null;
-
-
-        let mimeType =
-            "image/png";
-
-
+        // Find generated image
+        let imageData = null;
+        let mimeType = "image/png";
+
+        // Preferred output
         if (
             data.output_image &&
             data.output_image.data
         ) {
-
             imageData =
                 data.output_image.data;
-
 
             mimeType =
                 data.output_image.mime_type ||
                 "image/png";
-
         }
 
-
-        /*
-         * Fallback to the steps array.
-         */
-
+        // Fallback: search steps
         if (
             !imageData &&
-            Array.isArray(
-                data.steps
-            )
+            Array.isArray(data.steps)
         ) {
-
-            for (
-                const step
-                of data.steps
-            ) {
-
-                if (
-                    step.type !==
-                    "model_output"
-                )
-                    continue;
-
-
+            for (const step of data.steps) {
                 if (
                     !Array.isArray(
                         step.content
                     )
-                )
-                    continue;
-
-
-                for (
-                    const content
-                    of step.content
                 ) {
+                    continue;
+                }
 
+                for (const content of step.content) {
                     if (
-                        content.type ===
-                            "image" &&
+                        content &&
+                        content.type === "image" &&
                         content.data
                     ) {
-
                         imageData =
                             content.data;
-
 
                         mimeType =
                             content.mime_type ||
                             "image/png";
 
+                        break;
                     }
-
                 }
 
+                if (imageData) {
+                    break;
+                }
             }
-
         }
 
-
+        // No image returned
         if (!imageData) {
+            console.error(
+                "Gemini response contained no image:",
+                JSON.stringify(data)
+            );
 
             return {
-
-                statusCode:
-                    502,
+                statusCode: 502,
 
                 headers: {
-
-                    "Content-Type":
-                        "application/json"
-
+                    "Content-Type": "application/json"
                 },
 
-                body:
-                    JSON.stringify({
-
-                        error:
-                            "Gemini returned no image."
-
-                    })
-
+                body: JSON.stringify({
+                    error:
+                        "Gemini completed the request but returned no image."
+                })
             };
-
         }
 
-
-        /*
-         * Return the generated image
-         * to the browser as a data URL.
-         */
-
+        // Send image back to index.html
         return {
-
-            statusCode:
-                200,
+            statusCode: 200,
 
             headers: {
-
-                "Content-Type":
-                    "application/json",
-
-                "Cache-Control":
-                    "no-store"
-
+                "Content-Type": "application/json",
+                "Cache-Control": "no-store"
             },
 
-            body:
-                JSON.stringify({
+            body: JSON.stringify({
+                image:
+                    `data:${mimeType};base64,${imageData}`,
 
-                    image:
-                        `data:${mimeType};base64,${imageData}`,
+                mimeType: mimeType,
 
-                    mimeType:
-                        mimeType,
-
-                    interactionId:
-                        data.id || null
-
-                })
-
+                interactionId:
+                    data.id || null
+            })
         };
 
-    }
-
-
-    catch (error) {
-
+    } catch (error) {
         console.error(
             "Image function error:",
             error
         );
 
-
         return {
-
-            statusCode:
-                500,
+            statusCode: 500,
 
             headers: {
-
-                "Content-Type":
-                    "application/json"
-
+                "Content-Type": "application/json"
             },
 
-            body:
-                JSON.stringify({
-
-                    error:
-                        "Something went wrong while creating the image."
-
-                })
-
+            body: JSON.stringify({
+                error:
+                    error?.message ||
+                    "Something went wrong while creating the image."
+            })
         };
-
     }
-
 };
