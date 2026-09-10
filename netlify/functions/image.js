@@ -1,5 +1,5 @@
 exports.handler = async function (event) {
-    // Only allow POST
+    // Only POST requests
     if (event.httpMethod !== "POST") {
         return {
             statusCode: 405,
@@ -12,7 +12,7 @@ exports.handler = async function (event) {
         };
     }
 
-    // Get API key from Netlify environment variables
+    // Gemini API key
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
@@ -28,7 +28,7 @@ exports.handler = async function (event) {
     }
 
     try {
-        // Parse request
+        // Parse frontend request
         const body = JSON.parse(event.body || "{}");
 
         const prompt = String(body.prompt || "").trim();
@@ -45,38 +45,44 @@ exports.handler = async function (event) {
             };
         }
 
+        // Supported frontend settings
         const aspectRatio = body.aspectRatio || "1:1";
-        const imageSize = body.imageSize || "1K";
+
+        const imageSize =
+            ["1K", "2K", "4K", "512"].includes(body.imageSize)
+                ? body.imageSize
+                : "1K";
 
         const previousInteractionId =
             body.previousInteractionId || null;
 
-        // Reference images
+        /*
+         * Gemini 3.1 Flash Image supports reference images.
+         * Keep a maximum of 10 here for compatibility with
+         * the model's object-reference capability.
+         */
         const referenceImages =
             Array.isArray(body.referenceImages)
                 ? body.referenceImages
                 : [];
 
-        // Maximum 14 reference images
         const safeReferences = referenceImages
-            .slice(0, 14)
+            .slice(0, 10)
             .filter(function (image) {
                 return (
                     image &&
-                    image.data &&
-                    image.mimeType
+                    typeof image.data === "string" &&
+                    image.data.length > 0 &&
+                    typeof image.mimeType === "string" &&
+                    image.mimeType.startsWith("image/")
                 );
             });
 
-        // Build Gemini input
+        // Build multimodal input
         const input = [
             {
                 type: "text",
-                text:
-                    `Create an image based on the following request.
-
-User request:
-${prompt}`
+                text: prompt
             }
         ];
 
@@ -89,7 +95,16 @@ ${prompt}`
             });
         }
 
-        // Gemini request
+        /*
+         * IMPORTANT:
+         *
+         * Do NOT put mime_type inside response_format.
+         * This avoids the:
+         *
+         * "image/png is not supported for response_format.mime_type"
+         *
+         * error shown in your screenshot.
+         */
         const requestBody = {
             model: "gemini-3.1-flash-image",
 
@@ -97,13 +112,12 @@ ${prompt}`
 
             response_format: {
                 type: "image",
-                mime_type: "image/png",
                 aspect_ratio: aspectRatio,
                 image_size: imageSize
             }
         };
 
-        // Continue previous image interaction when editing
+        // Continue previous image interaction
         if (previousInteractionId) {
             requestBody.previous_interaction_id =
                 previousInteractionId;
@@ -126,7 +140,7 @@ ${prompt}`
 
         const data = await response.json();
 
-        // Gemini returned an error
+        // Gemini API error
         if (!response.ok) {
             console.error(
                 "Gemini API error:",
@@ -153,7 +167,9 @@ ${prompt}`
         let imageData = null;
         let mimeType = "image/png";
 
-        // Preferred output
+        /*
+         * Normal Gemini response
+         */
         if (
             data.output_image &&
             data.output_image.data
@@ -166,21 +182,29 @@ ${prompt}`
                 "image/png";
         }
 
-        // Fallback: search steps
+        /*
+         * Fallback: search the steps array
+         */
         if (
             !imageData &&
             Array.isArray(data.steps)
         ) {
             for (const step of data.steps) {
+
                 if (
-                    !Array.isArray(
-                        step.content
-                    )
+                    step.type !== "model_output"
+                ) {
+                    continue;
+                }
+
+                if (
+                    !Array.isArray(step.content)
                 ) {
                     continue;
                 }
 
                 for (const content of step.content) {
+
                     if (
                         content &&
                         content.type === "image" &&
@@ -203,10 +227,12 @@ ${prompt}`
             }
         }
 
-        // No image returned
+        /*
+         * No image found
+         */
         if (!imageData) {
             console.error(
-                "Gemini response contained no image:",
+                "Gemini returned no image:",
                 JSON.stringify(data)
             );
 
@@ -224,7 +250,9 @@ ${prompt}`
             };
         }
 
-        // Send image back to index.html
+        /*
+         * Return image to index.html
+         */
         return {
             statusCode: 200,
 
@@ -237,7 +265,8 @@ ${prompt}`
                 image:
                     `data:${mimeType};base64,${imageData}`,
 
-                mimeType: mimeType,
+                mimeType:
+                    mimeType,
 
                 interactionId:
                     data.id || null
@@ -245,6 +274,7 @@ ${prompt}`
         };
 
     } catch (error) {
+
         console.error(
             "Image function error:",
             error
